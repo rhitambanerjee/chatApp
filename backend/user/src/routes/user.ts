@@ -1,5 +1,9 @@
 import express from "express";
+import { loginUser,verifyUser } from "../controller/user.js";
 
-const Router=express.Router();
+const router=express.Router();
 
-export default Router;
+router.post("/login",loginUser);
+router.post("/verify",verifyUser);
+
+export default router;

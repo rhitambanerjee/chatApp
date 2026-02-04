@@ -18,6 +18,10 @@ if (!redisUrl) {
 
 export const redisClient = createClient({
   url: redisUrl,
+  socket: {
+    tls: true,
+    rejectUnauthorized: false,
+  },
 });
 
 redisClient.connect().then(() => {
@@ -30,8 +34,9 @@ redisClient.on("error", (err) => {
   console.error("Redis connection error:", err);
 });
 
+app.use(express.json());
 
-app.use('api/v1',userRoutes);
+app.use('/api/v1',userRoutes);
 
 app.listen(port,()=>{
     console.log(`This app is running on port ${port}`);
